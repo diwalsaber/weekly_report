@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Weekly Report - {{ week_start }} au {{ week_end }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin: 0 0 10px 0;
+        }
+
+        .header .date {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 20px;
+            border-left: 4px solid #3498db;
+            padding-left: 12px;
+            margin-bottom: 15px;
+        }
+
+        /* Executive Summary */
+        .summary {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+
+        .summary ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .summary li {
+            margin-bottom: 8px;
+        }
+
+        /* KPIs Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .kpi-card.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .kpi-card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .kpi-card.info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .kpi-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .kpi-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .kpi-change {
+            font-size: 12px;
+            margin-top: 5px;
+            opacity: 0.85;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        table th {
+            background-color: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Status badges */
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status.completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status.in-progress {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status.planned {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status.blocked {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+            height: 100%;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Lists */
+        ul.action-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.action-list li {
+            padding: 10px;
+            margin-bottom: 8px;
+            background-color: #f8f9fa;
+            border-left: 3px solid #3498db;
+            border-radius: 3px;
+        }
+
+        ul.action-list li strong {
+            color: #2c3e50;
+        }
+
+        /* Chart placeholder */
+        .chart-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+
+        /* Page break control */
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Weekly Report</h1>
+        <div class="date">Semaine du {{ week_start }} au {{ week_end }}</div>
+    </div>
+
+    <!-- Page 1: Executive Summary -->
+    <div class="section summary">
+        <h2>Résumé Exécutif</h2>
+        <ul>
+            {% for point in executive_summary %}
+            <li>{{ point }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- KPIs -->
+    <div class="section">
+        <h2>Indicateurs Clés</h2>
+        <div class="kpi-grid">
+            {% for kpi in kpis %}
+            <div class="kpi-card {{ kpi.type }}">
+                <div class="kpi-label">{{ kpi.label }}</div>
+                <div class="kpi-value">{{ kpi.value }}</div>
+                {% if kpi.change %}
+                <div class="kpi-change">{{ kpi.change }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if chart_path %}
+    <!-- Chart -->
+    <div class="section">
+        <h2>Évolution des Métriques</h2>
+        <div class="chart-container">
+            <img src="{{ chart_path }}" alt="Graphique d'évolution">
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="page-break"></div>
+
+    <!-- Projects/Tasks Progress -->
+    <div class="section">
+        <h2>Avancement des Projets</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Projet</th>
+                    <th>Statut</th>
+                    <th>Progression</th>
+                    <th>Responsable</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td><strong>{{ project.name }}</strong></td>
+                    <td><span class="status {{ project.status }}">{{ project.status_label }}</span></td>
+                    <td>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: {{ project.progress }}%">{{ project.progress }}%</div>
+                        </div>
+                    </td>
+                    <td>{{ project.owner }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Detailed Metrics -->
+    {% if detailed_metrics %}
+    <div class="section">
+        <h2>Métriques Détaillées</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Métrique</th>
+                    <th>Valeur actuelle</th>
+                    <th>Objectif</th>
+                    <th>Évolution</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for metric in detailed_metrics %}
+                <tr>
+                    <td>{{ metric.name }}</td>
+                    <td><strong>{{ metric.current }}</strong></td>
+                    <td>{{ metric.target }}</td>
+                    <td>{{ metric.evolution }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <div class="page-break"></div>
+
+    <!-- Key Points / Highlights -->
+    <div class="section">
+        <h2>Points d'Attention</h2>
+        <ul class="action-list">
+            {% for point in attention_points %}
+            <li>
+                <strong>{{ point.title }}</strong><br>
+                {{ point.description }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="section">
+        <h2>Prochaines Étapes</h2>
+        <ul class="action-list">
+            {% for step in next_steps %}
+            <li>
+                <strong>{{ step.action }}</strong>
+                {% if step.deadline %} - Échéance: {{ step.deadline }}{% endif %}
+                {% if step.owner %}<br>Responsable: {{ step.owner }}{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Généré automatiquement le {{ generation_date }} | Weekly Report System v1.0
+    </div>
+</body>
+</html>

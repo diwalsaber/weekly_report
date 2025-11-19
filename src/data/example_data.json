@@ -1,0 +1,172 @@
+{
+  "week_start": "11 novembre 2024",
+  "week_end": "17 novembre 2024",
+  "executive_summary": [
+    "Lancement réussi de la nouvelle fonctionnalité d'authentification avec un taux d'adoption de 85%",
+    "Amélioration des performances du système : temps de réponse réduit de 40%",
+    "3 sprints complétés avec 92% des tâches livrées dans les délais",
+    "Résolution de 15 tickets support critique, satisfaction client en hausse de 12%"
+  ],
+  "kpis": [
+    {
+      "label": "Utilisateurs Actifs",
+      "value": "12,450",
+      "change": "+15% vs semaine précédente",
+      "type": "success"
+    },
+    {
+      "label": "Temps de Réponse Moyen",
+      "value": "340ms",
+      "change": "-40% (amélioration)",
+      "type": "success"
+    },
+    {
+      "label": "Taux de Conversion",
+      "value": "3.8%",
+      "change": "+0.5 points",
+      "type": "info"
+    },
+    {
+      "label": "Tickets Résolus",
+      "value": "47",
+      "change": "15 critiques, 32 standards",
+      "type": "info"
+    },
+    {
+      "label": "Disponibilité",
+      "value": "99.9%",
+      "change": "Uptime conforme SLA",
+      "type": "success"
+    },
+    {
+      "label": "Déploiements",
+      "value": "8",
+      "change": "100% sans rollback",
+      "type": "success"
+    }
+  ],
+  "chart_data": {
+    "title": "Évolution des Utilisateurs Actifs Quotidiens",
+    "label": "Utilisateurs",
+    "dates": [
+      "2024-11-11",
+      "2024-11-12",
+      "2024-11-13",
+      "2024-11-14",
+      "2024-11-15",
+      "2024-11-16",
+      "2024-11-17"
+    ],
+    "values": [10500, 11200, 10800, 12100, 12450, 11900, 12300]
+  },
+  "projects": [
+    {
+      "name": "Module d'Authentification SSO",
+      "status": "completed",
+      "status_label": "Terminé",
+      "progress": 100,
+      "owner": "Équipe Backend"
+    },
+    {
+      "name": "Refonte Dashboard Analytique",
+      "status": "in-progress",
+      "status_label": "En cours",
+      "progress": 75,
+      "owner": "Équipe Frontend"
+    },
+    {
+      "name": "API Mobile v2.0",
+      "status": "in-progress",
+      "status_label": "En cours",
+      "progress": 60,
+      "owner": "Équipe Mobile"
+    },
+    {
+      "name": "Migration Base de Données",
+      "status": "planned",
+      "status_label": "Planifié",
+      "progress": 20,
+      "owner": "Équipe DevOps"
+    },
+    {
+      "name": "Système de Notifications Push",
+      "status": "in-progress",
+      "status_label": "En cours",
+      "progress": 45,
+      "owner": "Équipe Backend"
+    }
+  ],
+  "detailed_metrics": [
+    {
+      "name": "Nouveaux Utilisateurs",
+      "current": "1,240",
+      "target": "1,000",
+      "evolution": "+24%"
+    },
+    {
+      "name": "Taux de Rétention (J+7)",
+      "current": "68%",
+      "target": "65%",
+      "evolution": "+3 points"
+    },
+    {
+      "name": "Revenus Hebdomadaires",
+      "current": "€45,200",
+      "target": "€42,000",
+      "evolution": "+7.6%"
+    },
+    {
+      "name": "Coût par Acquisition",
+      "current": "€12.50",
+      "target": "€15.00",
+      "evolution": "-16.7%"
+    },
+    {
+      "name": "Net Promoter Score",
+      "current": "72",
+      "target": "70",
+      "evolution": "+2 points"
+    }
+  ],
+  "attention_points": [
+    {
+      "title": "Pic de charge inhabituel jeudi soir",
+      "description": "Augmentation soudaine de 300% du trafic entre 20h et 22h. Infrastructure a tenu mais à surveiller. Investigation en cours pour comprendre l'origine (campagne marketing non communiquée ?)."
+    },
+    {
+      "title": "Dépendance critique nécessitant mise à jour",
+      "description": "La librairie 'auth-sdk' utilisée a publié un patch de sécurité critique (CVE-2024-xxxxx). Mise à jour planifiée pour lundi prochain avec tests de non-régression."
+    },
+    {
+      "title": "Délai de livraison API Mobile v2.0",
+      "description": "Prise de retard de 2 semaines sur le planning initial due à des changements de spécifications côté client. Nouvelle deadline fixée au 1er décembre avec validation du client."
+    }
+  ],
+  "next_steps": [
+    {
+      "action": "Finaliser les tests de charge pour la migration de base de données",
+      "deadline": "22 novembre 2024",
+      "owner": "DevOps Team"
+    },
+    {
+      "action": "Déployer le patch de sécurité auth-sdk en production",
+      "deadline": "20 novembre 2024",
+      "owner": "Backend Team"
+    },
+    {
+      "action": "Organiser session de design review pour le nouveau dashboard",
+      "deadline": "23 novembre 2024",
+      "owner": "Product Manager"
+    },
+    {
+      "action": "Préparer documentation API Mobile v2.0 pour les partenaires",
+      "deadline": "28 novembre 2024",
+      "owner": "Mobile Team"
+    },
+    {
+      "action": "Mettre en place monitoring avancé suite au pic de charge",
+      "deadline": "24 novembre 2024",
+      "owner": "SRE Team"
+    }
+  ]
+}

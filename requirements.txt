@@ -1,0 +1,21 @@
+# Weekly Report Generator - Dependencies
+
+# PDF Generation
+weasyprint==61.2
+jinja2==3.1.4
+
+# Data visualization
+matplotlib==3.9.2
+pandas==2.2.3
+
+# Data handling
+python-dateutil==2.9.0
+
+# Optional: Email sending (uncomment based on your email service)
+# sendgrid==6.11.0
+# python-smtp==1.0.0
+
+# Development dependencies
+# pytest==8.3.3
+# black==24.8.0
+# flake8==7.1.1
