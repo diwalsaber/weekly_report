@@ -1,7 +1,7 @@
 # Weekly Report Generator - Dependencies
 
 # PDF Generation
-weasyprint==61.2
+weasyprint>=66.0
 jinja2==3.1.4
 
 # Data visualization
